@@ -28,7 +28,7 @@ class Rule {
 
   count(dice, val) {
     // # times val appears in dice
-    return dice.filter(d => d === val).length;
+    return dice.filter((d) => d === val).length;
   }
 }
 
@@ -38,7 +38,7 @@ class Rule {
  */
 
 class TotalOneNumber extends Rule {
-  evalRoll = dice => {
+  evalRoll = (dice) => {
     return this.val * this.count(dice, this.val);
   };
 }
@@ -49,16 +49,38 @@ class TotalOneNumber extends Rule {
  */
 
 class SumDistro extends Rule {
-  evalRoll = dice => {
+  evalRoll = (dice) => {
     // do any of the counts meet of exceed this distro?
-    return this.freq(dice).some(c => c >= this.count) ? this.sum(dice) : 0;
+    console.log(dice);
+    console.log(this.freq(dice));
+    console.log(this.count);
+    console.log(Rule);
+    // how does it work count here? how is having the arguments passed??
+    // colt assign a prop count, but a count method also exists. The difference is just the parentheses ()
+    return this.freq(dice).some((c) => c >= this.count) ? this.sum(dice) : 0;
   };
 }
 
 /** Check if full house (3-of-kind and 2-of-kind) */
 
-class FullHouse {
+class FullHouse extends Rule {
   // TODO
+  // It is created a set from the dice array, we assume that there are only 2 values (both 3-of-kind and 2-of-king). We convert it again into an array and check for each number if the count the dice array is 3 times or 2 times
+  // use sort and freq to do it more quickly
+  evalRoll = (dice) => {
+    console.log(dice);
+    let set = new Set(dice);
+    let arr = [...set];
+    console.log(arr);
+    console.log(
+      arr.every((c) => this.count(dice, c) === 2 || this.count(dice, c) === 3)
+    );
+    return arr.every(
+      (c) => this.count(dice, c) === 2 || this.count(dice, c) === 3
+    )
+      ? 25
+      : 0;
+  };
 }
 
 /** Check for small straights. */
@@ -70,7 +92,7 @@ class SmallStraight {
 /** Check for large straights. */
 
 class LargeStraight extends Rule {
-  evalRoll = dice => {
+  evalRoll = (dice) => {
     const d = new Set(dice);
 
     // large straight must be 5 different dice & only one can be a 1 or a 6
@@ -81,7 +103,7 @@ class LargeStraight extends Rule {
 /** Check if all dice are same. */
 
 class Yahtzee extends Rule {
-  evalRoll = dice => {
+  evalRoll = (dice) => {
     // all dice must be the same
     return this.freq(dice)[0] === 5 ? this.score : 0;
   };
@@ -100,7 +122,7 @@ const threeOfKind = new SumDistro({ count: 3 });
 const fourOfKind = new SumDistro({ count: 4 });
 
 // full house scores as flat 25
-const fullHouse = "TODO";
+const fullHouse = new FullHouse();
 
 // small/large straights score as 30/40
 const smallStraight = "TODO";
@@ -125,5 +147,5 @@ export {
   smallStraight,
   largeStraight,
   yahtzee,
-  chance
+  chance,
 };
