@@ -36,7 +36,7 @@ class Game extends Component {
 
   roll(evt) {
     // roll dice whose indexes are in reroll
-    console.log(this.state.rollsLeft);
+    // console.log(this.state.rollsLeft);
     this.setState((st) => ({
       dice: st.dice.map((d, i) =>
         // for ex. 0.6 will round to 1
