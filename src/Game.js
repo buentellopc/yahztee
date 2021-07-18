@@ -36,6 +36,7 @@ class Game extends Component {
 
   roll(evt) {
     // roll dice whose indexes are in reroll
+    console.log(this.state.rollsLeft);
     this.setState((st) => ({
       dice: st.dice.map((d, i) =>
         // for ex. 0.6 will round to 1
@@ -47,9 +48,11 @@ class Game extends Component {
   }
 
   toggleLocked(idx) {
-    // toggle whether idx is in locked or not
-    console.log(idx);
-    this.setState((st) => ({
+    // toggle whether idx is in locked or not 
+    // console.log(idx);
+    // console.log(this.state.rollsLeft)
+    
+    this.state.rollsLeft > 1 && this.setState((st) => ({
       locked: [
         ...st.locked.slice(0, idx),
         !st.locked[idx],
