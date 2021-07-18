@@ -85,10 +85,16 @@ class FullHouse extends Rule {
 
 /** Check for small straights. */
 
-class SmallStraight {
-  // TODO
-}
-
+class SmallStraight extends Rule {
+  evalRoll = (dice) => {
+    let opt = [[1,2,3,4], [2,3,4,5], [3,4,5,6]]
+    const d = new Set(dice)
+    const arr = [...d].sort()
+    console.log(arr);
+    let res = opt.some((option, i) => option.every((num,j) => num === arr[j]))
+    console.log('smallStraigh?', res);
+   return res ? this.score : 0
+  }}
 /** Check for large straights. */
 
 class LargeStraight extends Rule {
@@ -125,7 +131,7 @@ const fourOfKind = new SumDistro({ count: 4 });
 const fullHouse = new FullHouse();
 
 // small/large straights score as 30/40
-const smallStraight = "TODO";
+const smallStraight = new SmallStraight({score: 30});
 const largeStraight = new LargeStraight({ score: 40 });
 
 // yahtzee scores as 50
