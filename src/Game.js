@@ -42,24 +42,26 @@ class Game extends Component {
         // for ex. 0.6 will round to 1
         st.locked[i] ? d : Math.ceil(Math.random() * 6)
       ),
+      // when 1 > 1... locked array will be filled with all true values (all die locked)
       locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
       rollsLeft: st.rollsLeft - 1,
     }));
   }
 
   toggleLocked(idx) {
-    // toggle whether idx is in locked or not 
+    // toggle whether idx is in locked or not
     // console.log(idx);
-    // console.log(this.state.rollsLeft)
-    
-    this.state.rollsLeft > 1 && this.setState((st) => ({
-      locked: [
-        ...st.locked.slice(0, idx),
-        !st.locked[idx],
-        ...st.locked.slice(idx + 1),
-      ],
-    }));
-    console.log(this.state.locked);
+    console.log(this.state.rollsLeft);
+
+    this.state.rollsLeft >= 1 &&
+      this.setState((st) => ({
+        locked: [
+          ...st.locked.slice(0, idx),
+          !st.locked[idx],
+          ...st.locked.slice(idx + 1),
+        ],
+      }));
+    // console.log(this.state.locked);
   }
 
   doScore(rulename, ruleFn) {
