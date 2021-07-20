@@ -13,14 +13,39 @@ class Die extends Component {
   }
 
   render() {
+    let icon = "";
+    switch (this.props.val) {
+      case 1:
+        icon = "one";
+        break;
+      case 2:
+        icon = "two";
+        break;
+      case 3:
+        icon = "three";
+        break;
+      case 4:
+        icon = "four";
+        break;
+      case 5:
+        icon = "five";
+        break;
+      case 6:
+        icon = "six";
+        break;
+      default:
+        icon = this.props.val;
+        break;
+    }
+    console.log("hihihihi", icon);
     return (
       <button
-        className={"Die"}
+        className="Die"
         style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
         // this.props.handleClick would still receiv an evt argument
         onClick={this.handleClick}
       >
-        {this.props.val}
+        <i className={`fas fa-dice-${icon}`}></i>
       </button>
     );
   }

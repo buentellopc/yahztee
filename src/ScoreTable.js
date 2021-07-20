@@ -20,7 +20,6 @@ import {
 class ScoreTable extends Component {
   render() {
     const { scores, doScore } = this.props;
-    console.log(ones.description);
     return (
       <div className="ScoreTable">
         <section className="ScoreTable-section">
