@@ -8,6 +8,22 @@
   background-color: black;
   color: white;
   margin-right: 1em;
+  /* transition: transform 2s ease-out; */
+}
+
+.rotate {
+  /* transform: rotate(360deg); */
+  animation-name: move;
+  animation-duration: 1s;
+}
+
+@keyframes move {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* THE NICER STYLES MADE FOR THE FONT-AWESOME ICONS... */

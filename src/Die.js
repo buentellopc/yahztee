@@ -37,13 +37,21 @@ class Die extends Component {
         icon = this.props.val;
         break;
     }
-    console.log("hihihihi", icon);
+    // console.log(this.props.rotate);
+    console.log("is locked?", this.props.locked);
+    // console.log("can it move?", this.props.move);
+    let rotate = this.props.move && !this.props.locked ? "Die rotate" : "Die";
     return (
       <button
-        className="Die"
-        style={{ backgroundColor: this.props.locked ? "grey" : "black" }}
+        className={rotate}
+        style={{
+          backgroundColor: this.props.locked ? "grey" : "black",
+          // transform: this.props.locked ? `` : `rotate(${this.props.move}deg)`,
+        }}
         // this.props.handleClick would still receiv an evt argument
         onClick={this.handleClick}
+        // the value for css props should be in `` or ''
+        // style={{ transform: `rotate(${this.props.move}deg)` }}
       >
         <i className={`fas fa-dice-${icon}`}></i>
       </button>
